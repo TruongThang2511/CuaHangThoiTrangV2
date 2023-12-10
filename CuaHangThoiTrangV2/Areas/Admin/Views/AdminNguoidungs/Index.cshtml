@@ -1,0 +1,135 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<CuaHangThoiTrangV2.Models.Nguoidung>
+
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Danh sách tài khoản quản trị" + CurrentPage;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<h1>Danh sách người dùng</h1>
+<select class="custom-select" id="NguoidungID" name="NguoidungID" style="width: 200px;" asp-items="ViewBag.MaRole">
+    <option value="0" disabled selected>Chọn quyền truy cập</option>
+    <option value="all">All</option>
+</select>
+<p>
+    <button type="button" class="btn btn-gradient-success btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Create">Create New</a></button>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Mã Role
+            </th>
+            <th>
+                Tên Người Dùng
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Địa chỉ
+            </th>
+            <th>
+                Số điện thoại
+            </th>
+            <th>
+                Password
+            </th>
+            <th>
+                Chiều cao
+            </th>
+            <th>
+                Cân nặng
+            </th>
+            <th>
+              Chiều dài chân
+            </th>
+            <th>
+                Chiều rộng chân
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.MaRoleNavigation
+                    </td>
+                    <td>
+                        @item.TenNd
+                    </td>
+                    <td>
+                        @item.Email
+                    </td>
+                    <td>
+                        @item.Diachi
+                    </td>
+                    <td>
+                        @item.Sdt
+                    </td>
+                    <td>
+                        @item.Password
+                    </td>
+                    <td>
+                        @item.Chieucao
+                    </td>
+                    <td>
+                        @item.Cannang
+                    </td>
+                    <td>
+                        @item.Chieudaichan
+                    </td>
+                    <td>
+                        @item.Chieurongchan
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-gradient-primary btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Edit" asp-route-id="@item.MaNd">Edit</a></button>
+                        <button type="button" class="btn btn-gradient-info btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Details" asp-route-id="@item.MaNd">Details</a></button>
+                        <button type="button" class="btn btn-gradient-danger btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Delete" asp-route-id="@item.MaNd">Delete</a></button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+Trang @CurrentPage
+<pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminNguoidungs" asp-action="Index"></pager>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+            jQuery("txtNguoidungID").change(function () {
+                var nguoidungID = jQuery(this).children(":selected").attr("value");
+                nguoidungID = parseFloat(nguoidungID);
+                $('#txtNguoidungID option')
+                    .removeAttr('selected');
+                $("#txtNguoidungID > [value=" + nguoidungID + "]").attr("selected", "true");
+
+                $.ajax({
+                    url: '/Admin/AdminSanphams/Filtter',
+                    datatype: "json",
+                    type: "GET",
+                    data: {
+                        LoaiID: loaiID
+                    },
+                    async: true,
+                    success: function (results) {
+                        if (results.status == "success") {
+                            window.location.href = results.redirectUrl;
+                        }
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+        });
+    </script>
+}

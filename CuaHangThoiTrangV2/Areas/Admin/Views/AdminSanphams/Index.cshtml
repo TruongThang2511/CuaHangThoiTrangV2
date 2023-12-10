@@ -1,0 +1,183 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<CuaHangThoiTrangV2.Models.Sanpham>
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Danh sách sản phẩm" + CurrentPage;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Danh sách sản phẩm</h1>
+
+<div class="row" style="justify-content: space-evenly;">
+    <div class="col-md-6">
+        <div class="form-group">
+            <div class="input-group">
+                <input id="keyword" name="keyword" type="text" class="form-control" placeholder="Tìm kiếm sản phẩm" aria-label="Tên sản phẩm" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-sm btn-gradient-primary" type="button">Search</button>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="width:500px; margin:0; justify-content: space-between;">
+            <select class="form-control" id="LoaiID" name="LoaiID" style="width: 200px;" asp-items="ViewBag.MaL">
+                <option value="0" disabled selected>Chọn loại sản phẩm</option>
+                <option value="all">All</option>
+            </select>
+            <select class="form-control" id="ThuonghieuID" name="ThuonghieuID" style="width: 200px;" asp-items="ViewBag.MaTh">
+                <option value="0" disabled selected>Chọn thương hiệu</option>
+                <option value="all">All</option>
+            </select>
+         </div>
+    </div>
+    <div class="col-md-6" style="text-align: right;">
+        <button type="button" class="btn btn-gradient-success btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Create">Create New</a></button>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Loại
+            </th>
+            <th>
+                Thương hiệu
+            </th>
+            <th>
+                Tên sản phẩm
+            </th>
+            <th>
+                Giá
+            </th>
+            <th>
+                Hình 1
+            </th>
+            <th>
+                Hình 2
+            </th>
+            <th>
+                Hình 3
+            </th>
+            <th>
+                Số lượng
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="records_table">
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.MaLNavigation.TenL
+                    </td>
+                    <td>
+                        @item.MaThNavigation.TenTh
+                    </td>
+                    <td>
+                        @item.TenSp
+                    </td>
+                    <td>
+                        @item.Gia.ToString("#,##0") đ
+                    </td>
+                    <td>
+                        <img width="150px" height="150px" src="~/img/@item.Hinh" />                        
+                    </td>
+                    <td>
+                        <img width="150px" height="150px" src="~/img/@item.Hinh1" />
+                    </td>
+                    <td>
+                        <img width="150px" height="150px" src="~/img/@item.Hinh2" />
+                    </td>
+                    <td>
+                        @item.Soluong
+                    </td>
+
+                    <td>
+                        <button type="button" class="btn btn-gradient-primary btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Edit" asp-route-id="@item.MaSp">Edit</a></button>
+                        <button type="button" class="btn btn-gradient-info btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Details" asp-route-id="@item.MaSp">Details</a></button>
+                        <button type="button" class="btn btn-gradient-danger btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Delete" asp-route-id="@item.MaSp">Delete</a></button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+Trang @CurrentPage
+<pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminSanphams" asp-route-LoaiID="@ViewBag.CurrentLoaiID" asp-route-ThuonghieuID="@ViewBag.CurrentThuonghieuID" asp-action="Index"></pager>
+@section Scripts{
+    <script>
+        $(document).ready(function (){
+
+            jQuery("txtLoaiID").change(function () {
+                var loaiID = jQuery(this).children(":selected").attr("value");
+                loaiID = parseFloat(loaiID);
+                $('#txtLoaiID option')
+                    .removeAttr('selected');
+                $("#txtLoaiID > [value=" + loaiID + "]").attr("selected", "true");
+                
+                $.ajax({
+                    url: '/Admin/AdminSanphams/Filtter',
+                    datatype: "json",
+                    type: "GET",
+                    data:{
+                        LoaiID: loaiID
+                    },
+                    async: true,
+                    success: function(results){
+                        if(results.status == "success"){
+                            window.location.href = results.redirectUrl;
+                        }
+                    },
+                    error: function(xhr){
+                        alert('error');
+                    }
+                });
+            });
+            jQuery("#txtThuonghieuID").change(function () {
+                var thuonghieuID = jQuery(this).children(":selected").attr("value");
+                thuonghieuID = parseFloat(thuonghieuID);
+                $('#txtThuonghieuID option')
+                    .removeAttr('selected');
+                $("#txtThuonghieuID > [value=" + thuonghieuID + "]").attr("selected", "true");
+
+                $.ajax({
+                    url: '/Admin/AdminSanphams/Filtter',
+                    datatype: "json",
+                    type: "GET",
+                    data: {
+                        ThuonghieuID: thuonghieuID
+                    },
+                    async: true,
+                    success: function (results) {
+                        if (results.status == "success") {
+                            window.location.href = results.redirectUrl;
+                        }
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+            $("#keyword").keyup(function () {
+                var strkeyword = $('#keyword').val();
+                $.ajax({
+                    url: '/Admin/Search/FindProduct/',
+                    datatype: "json",
+                    type: "POST",
+                    data: { keyword: strkeyword },
+                    async: true,
+                    success: function (results) {
+                        $("#records_table").html("");
+                        $("#records_table").html(results);
+                    },
+                    error: function(xhr){
+                        alert('error');
+                    }
+                });
+            });
+        });
+    </script>d
+}

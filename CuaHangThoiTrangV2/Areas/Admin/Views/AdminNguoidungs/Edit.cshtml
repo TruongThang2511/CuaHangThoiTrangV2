@@ -1,0 +1,71 @@
+﻿@model CuaHangThoiTrangV2.Models.Nguoidung
+
+@{
+    ViewData["Title"] = "Chỉnh sửa tài khoản quản trị";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Chỉnh sửa</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MaNd" />
+            <div class="form-group">
+                <label asp-for="MaRole" class="control-label">Tên Role</label>
+                <select asp-for="MaRole" class="form-control" asp-items="ViewBag.MaRole"></select>
+                <span asp-validation-for="MaRole" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenNd" class="control-label">Tên Người Dùng</label>
+                <input asp-for="TenNd" class="form-control" />
+                <span asp-validation-for="TenNd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Email</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Diachi" class="control-label">Địa chỉ</label>
+                <input asp-for="Diachi" class="form-control" />
+                <span asp-validation-for="Diachi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sdt" class="control-label">Số điện thoại</label>
+                <input asp-for="Sdt" class="form-control" />
+                <span asp-validation-for="Sdt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Chieucao" class="control-label">Chiều cao</label>
+                <input asp-for="Chieucao" class="form-control" />
+                <span asp-validation-for="Chieucao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cannang" class="control-label">Cân nặng</label>
+                <input asp-for="Cannang" class="form-control" />
+                <span asp-validation-for="Cannang" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Chieudaichan" class="control-label">Chiều dài chân</label>
+                <input asp-for="Chieudaichan" class="form-control" />
+                <span asp-validation-for="Chieudaichan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Chieurongchan" class="control-label">Chiều rộng chân</label>
+                <input asp-for="Chieurongchan" class="form-control" />
+                <span asp-validation-for="Chieurongchan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <button type="button" class="btn btn-gradient-danger btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Index">Back to List</a></button>
+</div>
+

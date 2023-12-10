@@ -1,0 +1,39 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<CuaHangThoiTrangV2.Models.Loai>
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Quản lý loại sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Danh sách loại sản phẩm</h1>
+
+<p>
+    <button type="button" class="btn btn-gradient-success btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Create">Create New</a></button>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tên Loại
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenL)
+            </td>
+            <td>
+                <button type="button" class="btn btn-gradient-primary btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Edit" asp-route-id="@item.MaL">Edit</a></button>
+                <button type="button" class="btn btn-gradient-info btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Details" asp-route-id="@item.MaL">Details</a></button>
+                <button type="button" class="btn btn-gradient-danger btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Delete" asp-route-id="@item.MaL">Delete</a></button>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+Trang @CurrentPage
+<pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminSanphams" asp-route-LoaiID="@ViewBag.CurrentLoaiID" asp-route-ThuonghieuID="@ViewBag.CurrentThuonghieuID" asp-action="Index"></pager>

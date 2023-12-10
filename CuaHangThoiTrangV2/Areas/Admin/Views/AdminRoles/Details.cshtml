@@ -1,0 +1,24 @@
+﻿@model CuaHangThoiTrangV2.Models.Role
+
+@{
+    ViewData["Title"] = "Thông tin quyền truy cập";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Thông tin quyền truy cập</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Tên quyền truy cập
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TenRole)
+        </dd>
+    </dl>
+</div>
+<div>
+    <button type="button" class="btn btn-gradient-primary btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Edit" asp-route-id="@Model?.MaRole">Edit</a></button>
+    <button type="button" class="btn btn-gradient-danger btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Index">Back to List</a></button>
+</div>

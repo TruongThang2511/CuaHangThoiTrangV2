@@ -1,0 +1,89 @@
+﻿@model CuaHangThoiTrangV2.Models.Nguoidung
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Donhang> dsdonhang = ViewBag.Donhang;
+}
+
+<div class="row">
+    <div class="col-lg-3 col-md-5">
+
+    </div>
+    <div class="col-lg-9 col-md-7">
+        <h4>DANH SÁCH ĐƠN HÀNG</h4>
+        @await Html.PartialAsync("_DonhangPartialView",dsdonhang)
+    </div>
+</div>
+<div>
+    <h4>Thông tin của tôi</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TenNd)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TenNd)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Diachi)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Diachi)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sdt)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sdt)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Confirmpassword)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Confirmpassword)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Chieucao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Chieucao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cannang)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cannang)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Chieudaichan)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Chieudaichan)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Chieurongchan)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Chieurongchan)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MaRoleNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MaRoleNavigation.MaRole)
+        </dd>
+    </dl>
+</div>

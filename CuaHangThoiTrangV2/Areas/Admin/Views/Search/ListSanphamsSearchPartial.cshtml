@@ -1,0 +1,39 @@
+﻿@model List<Sanpham>
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.MaLNavigation.TenL
+            </td>
+            <td>
+                @item.MaThNavigation.TenTh
+            </td>
+            <td>
+                @item.TenSp
+            </td>
+            <td>
+                @item.Gia.ToString("#,##0") đ
+            </td>
+            <td>
+                <img width="150px" height="150px" src="~/img/@item.Hinh" />
+            </td>
+            <td>
+                <img width="150px" height="150px" src="~/img/@item.Hinh1" />
+            </td>
+            <td>
+                <img width="150px" height="150px" src="~/img/@item.Hinh2" />
+            </td>
+            <td>
+                @item.Soluong
+            </td>
+
+            <td>
+                <button type="button" class="btn btn-gradient-primary btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Edit" asp-route-id="@item.MaSp">Edit</a></button>
+                <button type="button" class="btn btn-gradient-info btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Details" asp-route-id="@item.MaSp">Details</a></button>
+                <button type="button" class="btn btn-gradient-danger btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Delete" asp-route-id="@item.MaSp">Delete</a></button>
+            </td>
+        </tr>
+    }
+}

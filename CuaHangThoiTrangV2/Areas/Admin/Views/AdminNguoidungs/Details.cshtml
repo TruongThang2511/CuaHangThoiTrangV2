@@ -1,0 +1,79 @@
+﻿@model CuaHangThoiTrangV2.Models.Nguoidung
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Nguoidung</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Mã Role
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MaRoleNavigation.MaRole)
+        </dd>
+        <dt class = "col-sm-2">
+            Tên Người Dùng
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TenNd)
+        </dd>
+        <dt class = "col-sm-2">
+            Email
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            Địa chỉ
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Diachi)
+        </dd>
+        <dt class = "col-sm-2">
+            Số điện thoại
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sdt)
+        </dd>
+        <dt class = "col-sm-2">
+            Password
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+        <dt class = "col-sm-2">
+            Chiều cao
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Chieucao)
+        </dd>
+        <dt class = "col-sm-2">
+            Cân nặng
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cannang)
+        </dd>
+        <dt class = "col-sm-2">
+            Chiều dài chân
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Chieudaichan)
+        </dd>
+        <dt class = "col-sm-2">
+            Chiều rộng chân
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Chieurongchan)
+        </dd>
+    </dl>
+</div>
+<div>
+    <button type="button" class="btn btn-gradient-primary btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Edit" asp-route-id="@Model.MaNd">Edit</a></button>
+    <button type="button" class="btn btn-gradient-danger btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Index">Back to List</a></button>
+</div>
