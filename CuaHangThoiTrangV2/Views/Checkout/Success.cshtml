@@ -1,0 +1,24 @@
+﻿@model CuaHangThoiTrangV2.ModelViews.MuaHangSuccessViewModel
+@{
+    ViewData["Title"] = "Success";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Order Details</h2>
+            <p>Hello, @Model.tenNd! Đơn hàng của bạn đã được đặt thành công. Bạn vui lòng chờ chúng tôi xác nhận đơn nhé.
+                Shop xin cảm ơn bạn!
+            </p>
+
+            <ul>
+                <li><strong>Mã đơn hàng:</strong> @Model.madon</li>
+                <li><strong>Số điện thoại:</strong> @Model.Phone</li>
+                <li><strong>Địa chỉ giao hàng:</strong> @Model.Address</li>
+            </ul>
+
+            <p>Thank you for shopping with us!</p>
+        </div>
+    </div>
+</div>

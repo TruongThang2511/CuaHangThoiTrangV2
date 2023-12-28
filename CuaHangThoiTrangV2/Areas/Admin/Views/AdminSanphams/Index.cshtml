@@ -18,16 +18,6 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="width:500px; margin:0; justify-content: space-between;">
-            <select class="form-control" id="LoaiID" name="LoaiID" style="width: 200px;" asp-items="ViewBag.MaL">
-                <option value="0" disabled selected>Chọn loại sản phẩm</option>
-                <option value="all">All</option>
-            </select>
-            <select class="form-control" id="ThuonghieuID" name="ThuonghieuID" style="width: 200px;" asp-items="ViewBag.MaTh">
-                <option value="0" disabled selected>Chọn thương hiệu</option>
-                <option value="all">All</option>
-            </select>
-         </div>
     </div>
     <div class="col-md-6" style="text-align: right;">
         <button type="button" class="btn btn-gradient-success btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Create">Create New</a></button>
@@ -83,13 +73,13 @@
                         @item.Gia.ToString("#,##0") đ
                     </td>
                     <td>
-                        <img width="150px" height="150px" src="~/img/@item.Hinh" />                        
+                        <img width="150px" height="150px" src="~/assets/img/@item.Hinh" />                        
                     </td>
                     <td>
-                        <img width="150px" height="150px" src="~/img/@item.Hinh1" />
+                        <img width="150px" height="150px" src="~/assets/img/@item.Hinh1" />
                     </td>
                     <td>
-                        <img width="150px" height="150px" src="~/img/@item.Hinh2" />
+                        <img width="150px" height="150px" src="~/assets/img/@item.Hinh2" />
                     </td>
                     <td>
                         @item.Soluong
@@ -179,5 +169,5 @@ Trang @CurrentPage
                 });
             });
         });
-    </script>d
+    </script>
 }

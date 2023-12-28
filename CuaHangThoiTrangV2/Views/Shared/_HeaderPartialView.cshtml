@@ -1,14 +1,10 @@
 ﻿<div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
     <div class="humberger__menu__logo">
-        <a href="#"><img src="~/assets/img/logo.png" alt=""></a>
+        <a href="/"><img src="~/assets/img/logo.png" /></a>
     </div>
     <div class="humberger__menu__cart">
-        <ul>
-            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-        </ul>
-        <div class="header__cart__price">item: <span>$150.00</span></div>
+        @await Component.InvokeAsync("HeaderCart")
     </div>
     <div class="humberger__menu__widget">
         @if (User.Identity.IsAuthenticated)
@@ -97,26 +93,21 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="./index.html"><img src="~/assets\img\logo.png" alt=""></a>
+                    <a href="/"><img src="~/assets\img\logo.png" alt=""></a>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-5">
                 <nav class="header__menu">
                     <ul>
                         <li><a href="/">Home</a></li>
                         <li><a href="/shop.html">Shop</a></li>
-                        <li><a asp-controller="Blog" asp-action="Index">Blog</a></li>
                         <li><a href="/lien-he.html">Contact</a></li>
                     </ul>
                 </nav>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <div class="header__cart">
-                    <ul>
-                        <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                        <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-                    </ul>
-                    <div class="header__cart__price">item: <span>$150.00</span></div>
+                    @await Component.InvokeAsync("HeaderCart")                   
                 </div>
             </div>
         </div>

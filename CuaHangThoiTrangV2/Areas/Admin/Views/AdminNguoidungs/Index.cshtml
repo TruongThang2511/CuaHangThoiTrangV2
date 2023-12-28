@@ -7,10 +7,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 <h1>Danh sách người dùng</h1>
-<select class="custom-select" id="NguoidungID" name="NguoidungID" style="width: 200px;" asp-items="ViewBag.MaRole">
-    <option value="0" disabled selected>Chọn quyền truy cập</option>
-    <option value="all">All</option>
-</select>
+
 <p>
     <button type="button" class="btn btn-gradient-success btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Create">Create New</a></button>
 </p>
@@ -34,18 +31,6 @@
             </th>
             <th>
                 Password
-            </th>
-            <th>
-                Chiều cao
-            </th>
-            <th>
-                Cân nặng
-            </th>
-            <th>
-              Chiều dài chân
-            </th>
-            <th>
-                Chiều rộng chân
             </th>
             <th>
                 Actions
@@ -75,18 +60,6 @@
                     </td>
                     <td>
                         @item.Password
-                    </td>
-                    <td>
-                        @item.Chieucao
-                    </td>
-                    <td>
-                        @item.Cannang
-                    </td>
-                    <td>
-                        @item.Chieudaichan
-                    </td>
-                    <td>
-                        @item.Chieurongchan
                     </td>
                     <td>
                         <button type="button" class="btn btn-gradient-primary btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Edit" asp-route-id="@item.MaNd">Edit</a></button>

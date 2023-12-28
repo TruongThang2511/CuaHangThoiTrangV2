@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CuaHangThoiTrangV2.Models;
 using PagedList.Core;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace CuaHangThoiTrangV2.Areas.Admin.Controllers
 {
@@ -56,7 +59,7 @@ namespace CuaHangThoiTrangV2.Areas.Admin.Controllers
         // GET: Admin/AdminNguoidungs/Create
         public IActionResult Create()
         {
-            ViewData["MaRole"] = new SelectList(_context.Roles, "MaRole", "MaRole");
+            ViewBag.MaRole = new SelectList(_context.Roles, "MaRole", "MaRole");
             return View();
         }
 
@@ -67,8 +70,14 @@ namespace CuaHangThoiTrangV2.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MaNd,MaRole,TenNd,Email,Diachi,Sdt,Password,Confirmpassword,Chieucao,Cannang,Chieudaichan,Chieurongchan")] Nguoidung nguoidung)
         {
+            ViewBag.MaRole = new SelectList(_context.Roles, "MaRole", "MaRole", nguoidung.MaRole);
+            var role = _context.Roles.AsNoTracking().FirstOrDefault(x => x.MaRole == nguoidung.MaRole);
+            nguoidung.MaRoleNavigation = role;
             if (ModelState.IsValid)
             {
+                
+                
+
                 _context.Add(nguoidung);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -90,7 +99,7 @@ namespace CuaHangThoiTrangV2.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["MaRole"] = new SelectList(_context.Roles, "MaRole", "MaRole", nguoidung.MaRole);
+            ViewBag.MaRole = new SelectList(_context.Roles, "MaRole", "MaRole", nguoidung.MaRole);
             return View(nguoidung);
         }
 
@@ -110,6 +119,12 @@ namespace CuaHangThoiTrangV2.Areas.Admin.Controllers
             {
                 try
                 {
+                    ViewBag.MaRole = new SelectList(_context.Roles, "MaRole", "MaRole", nguoidung.MaRole);
+                    string s = nguoidung.MaRole.ToString();
+                    if (int.TryParse(s, out int role))
+                    {
+                        nguoidung.MaRole = role;
+                    }
                     _context.Update(nguoidung);
                     await _context.SaveChangesAsync();
                 }
@@ -126,7 +141,6 @@ namespace CuaHangThoiTrangV2.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaRole"] = new SelectList(_context.Roles, "MaRole", "MaRole", nguoidung.MaRole);
             return View(nguoidung);
         }
 

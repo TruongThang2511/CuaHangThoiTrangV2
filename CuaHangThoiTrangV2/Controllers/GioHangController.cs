@@ -1,11 +1,13 @@
 ﻿using CuaHangThoiTrangV2.Extensions;
 using CuaHangThoiTrangV2.Models;
 using CuaHangThoiTrangV2.ModelViews;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace CuaHangThoiTrangV2.Controllers
 {
+    
     public class GioHangController : Controller
     {
         private readonly dbCHTTContext _context;
@@ -29,9 +31,10 @@ namespace CuaHangThoiTrangV2.Controllers
         [HttpPost]
         public IActionResult AddToCart(int productID, int? amount)
         {
+            List<CartItem> gioHang = GioHang;
             try
             {
-                List<CartItem> gioHang = GioHang;
+                
                 CartItem item = GioHang.SingleOrDefault(p => p.sanpham.MaSp == productID);
                 if (item != null)
                 {
@@ -82,7 +85,30 @@ namespace CuaHangThoiTrangV2.Controllers
 
         public IActionResult Index()
         {
+
             return View(GioHang);
+        }
+        [HttpPost]
+        public ActionResult UpdateCart(int productID,int? amount)
+        {
+            var cart = HttpContext.Session.Get<List<CartItem>>("GioHang");
+            try
+            {
+                if(cart != null)
+                {
+                    CartItem item = cart.SingleOrDefault(p => p.sanpham.MaSp == productID);
+                    if(item != null && amount.HasValue)
+                    {
+                        item.amount = amount.Value;
+                    }
+                    HttpContext.Session.Set<List<CartItem>>("GioHang", cart);
+                }
+                return Json(new { success = true });
+            }
+            catch
+            {
+                return Json(new { success = false });
+            }
         }
     }
 }

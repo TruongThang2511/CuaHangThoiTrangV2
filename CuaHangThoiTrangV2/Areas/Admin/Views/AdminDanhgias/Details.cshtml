@@ -1,0 +1,37 @@
+﻿@model CuaHangThoiTrangV2.Models.Danhgium
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Danhgium</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sosao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sosao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NoidungDg)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NoidungDg)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MaSpNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MaSpNavigation.MaSp)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.MaDg">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -15,7 +15,13 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="MaRole" class="control-label">Mã Role</label>
-                <select asp-for="MaRole" class ="form-control" asp-items="ViewBag.MaRole"></select>
+                <select name="MaRole">
+                    @foreach (var item in ViewBag.MaRole)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+                <span asp-validation-for="MaRole" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TenNd" class="control-label">Tên Người Dùng</label>

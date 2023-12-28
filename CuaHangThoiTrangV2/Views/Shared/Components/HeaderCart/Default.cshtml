@@ -1,0 +1,11 @@
+﻿@model List<CuaHangThoiTrangV2.ModelViews.CartItem>
+@if(Model != null && Model.Count() > 0)
+{
+    @await Component.InvokeAsync("NumberCart")
+    <div class="header__cart__price">item: <span>@Model.Sum(x => x.tongTien).ToString("#,##0") vnđ</span></div>
+    <a class="header__top__right__auth" href="/GioHang/Index"> Xem giỏ hàng</a>
+}
+else{
+    @await Component.InvokeAsync("NumberCart")
+    <div class="header__cart__price">Giỏ hàng rỗng</div>
+}

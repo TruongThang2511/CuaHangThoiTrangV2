@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using CuaHangThoiTrangV2.ModelViews;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace CuaHangThoiTrangV2.Models;
 
@@ -340,4 +342,6 @@ public partial class dbCHTTContext : DbContext
     public DbSet<CuaHangThoiTrangV2.ModelViews.RegisterViewModel> RegisterViewModel { get; set; } = default!;
 
     public DbSet<CuaHangThoiTrangV2.ModelViews.LoginViewModel> LoginViewModel { get; set; } = default!;
+
+    public DbSet<CuaHangThoiTrangV2.ModelViews.MuaHangViewModel> MuaHangViewModel { get; set; } = default!;
 }

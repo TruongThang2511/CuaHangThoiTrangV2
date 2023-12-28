@@ -3,6 +3,7 @@ using CuaHangThoiTrangV2.Models;
 using CuaHangThoiTrangV2.ModelViews;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -10,10 +11,10 @@ using System.Text.RegularExpressions;
 
 namespace CuaHangThoiTrangV2.Controllers
 {
-    [Authorize]
     public class AccountsController : Controller
     {
         private readonly dbCHTTContext _context;
+
         public AccountsController(dbCHTTContext context)
         {
             _context = context;
@@ -106,11 +107,10 @@ namespace CuaHangThoiTrangV2.Controllers
                         };
                         ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
                         ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-                        await HttpContext.SignInAsync(claimsPrincipal);
 
                         //var SpCart = GioHang;
                         //if (SpCart.Count > 0) return RedirectToAction("Shipping", "Checkout");
-
+                        await HttpContext.SignInAsync(claimsPrincipal);
                         return RedirectToAction("Index", "Accounts");
                     }
                     catch (Exception ex)
@@ -170,7 +170,11 @@ namespace CuaHangThoiTrangV2.Controllers
                     ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
                     ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                     await HttpContext.SignInAsync(claimsPrincipal);
-                    return RedirectToAction("Index", "Accounts");
+                    if(nguoidung.MaRole == 1)
+                    {
+                        return RedirectToAction("Index", "Home", new { area = "Admin" });
+                    }
+                    return RedirectToAction("Index", "Home");
                 }
             }
             catch (Exception ex) {

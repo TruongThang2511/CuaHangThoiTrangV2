@@ -1,0 +1,13 @@
+﻿@model List<CuaHangThoiTrangV2.ModelViews.CartItem>
+@if(Model != null && Model.Count() > 0)
+{
+    <ul>
+        <li><a href="/GioHang/Index"><i class="fa fa-shopping-bag" id="numberCart"></i> <span>@Model.Count()</span></a></li>
+    </ul>
+}
+else
+{
+    <ul>
+        <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>0</span></a></li>
+    </ul>
+}
