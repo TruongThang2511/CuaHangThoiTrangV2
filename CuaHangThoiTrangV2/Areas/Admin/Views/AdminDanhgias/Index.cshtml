@@ -1,0 +1,48 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<CuaHangThoiTrangV2.Models.Danhgium>
+
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Danh sách đánh giá</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Số sao
+            </th>
+            <th>
+                Nội dung đánh giá
+            </th>
+            <th>
+                Tên sản phẩm
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sosao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoidungDg)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaSpNavigation.TenSp)
+            </td>
+            <td>
+                <button type="button" class="btn btn-gradient-info btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Details" asp-route-id="@item.MaDg">Details</a></button>
+                <button type="button" class="btn btn-gradient-danger btn-rounded btn-fw"><a style="text-decoration:none; color:white" asp-action="Delete" asp-route-id="@item.MaDg">Delete</a></button>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+Trang @CurrentPage
+<pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminDanhgias" asp-action="Index"></pager>

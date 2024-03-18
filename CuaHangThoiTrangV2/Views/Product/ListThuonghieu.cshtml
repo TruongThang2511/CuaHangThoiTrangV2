@@ -56,12 +56,12 @@
 </section>
 <!-- Hero Section End -->
 <!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg" data-setbg="@Url.Content("~/assets/img/breadcrumb.jpg")">
+<section class="breadcrumb-section set-bg" data-setbg="@Url.Content("~/assets/img/24cara-authentic.jpg")">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
-                    <h2>Organi Shop</h2>
+                    <h2>24cara Shop</h2>
                     <div class="breadcrumb__option">
                         <a href="/">Home</a>
                         <span>Danh sách sản phẩm</span>
@@ -86,21 +86,12 @@
                                 <li><a href="~/Product/List?id=@loai1.MaL">@loai1.TenL</a></li>
                             }
                         </ul>
-                    </div>ss
+                    </div>
                 </div>
             </div>
             <div class="col-lg-9 col-md-7">
                 <div class="filter__item">
                     <div class="row">
-                        <div class="col-lg-4 col-md-5">
-                            <div class="filter__sort">
-                                <span>Sort By</span>
-                                <select>
-                                    <option value="0">Default</option>
-                                    <option value="0">Default</option>
-                                </select>
-                            </div>
-                        </div>
                         <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
                                 <h6><span>@Model.Count()</span> Products found</h6>
@@ -115,10 +106,7 @@
                         {
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="@Url.Content("~/img/" + @item.Hinh + "")">
-                                        <ul class="product__item__pic__hover">
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
+                                    <div class="product__item__pic set-bg" data-setbg="@Url.Content("~/assets/img/" + @item.Hinh + "")">
                                     </div>
                                     <div class="product__item__text">
                                         <h6><a href="~/Product/Details?id=@item.MaSp">@item.TenSp</a></h6>
@@ -129,7 +117,7 @@
                         }
                     }
                 </div>
-                <pager class="pager-container" options="@PagedListRenderOptions.Bootstrap4PageNumbersOnly" list="@Model" asp-area="" asp-controller="Product" asp-route-id="@thuonghieu.MaTh" asp-action="List"></pager>
+                <pager class="pager-container" options="@PagedListRenderOptions.Bootstrap4PageNumbersOnly" list="@Model" asp-area="" asp-controller="Product" asp-route-id="@thuonghieu.MaTh" asp-action="ListThuonghieu"></pager>
             </div>
         </div>
     </div>

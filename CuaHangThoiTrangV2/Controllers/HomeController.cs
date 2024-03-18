@@ -22,6 +22,7 @@ namespace CuaHangThoiTrangV2.Controllers
         {
             ViewBag.lsLoais = _context.Loais.AsNoTracking().OrderByDescending(x => x.MaL).ToList();
             ViewBag.lsThuonghieus = _context.Thuonghieus.AsNoTracking().OrderByDescending(x => x.MaTh).ToList();
+            ViewBag.lsSP = _context.Sanphams.AsNoTracking().OrderByDescending(x => x.MaSp).Take(8).ToList();
             return View();
         }
         [Route("lien-he.html", Name = "Contact")]

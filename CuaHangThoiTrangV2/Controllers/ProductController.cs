@@ -67,6 +67,27 @@ namespace CuaHangThoiTrangV2.Controllers
             }
         }
 
+        public IActionResult ListLoai(int id, int page = 1)
+        {
+            try
+            {
+                var pageSize = 12;
+                var loai = _context.Loais.AsNoTracking().SingleOrDefault(x => x.MaL == id);
+                var lsSanphams = _context.Sanphams
+                    .AsNoTracking()
+                    .Where(x => x.MaL == loai.MaL)
+                    .OrderByDescending(x => x.MaSp);
+                PagedList<Sanpham> models = new PagedList<Sanpham>(lsSanphams, page, pageSize);
+                ViewBag.CurrentPage = page;
+                ViewBag.CurrentLoai = loai;
+                return View(models);
+            }
+            catch
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
         public IActionResult Details(int id)
         {
             try

@@ -1,6 +1,9 @@
 using AspNetCoreHero.ToastNotification;
+using CuaHangThoiTrangV2;
 using CuaHangThoiTrangV2.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
@@ -21,6 +24,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
                     options.AccessDeniedPath = "/";
                 });
 builder.Services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[] {UnicodeRanges.All}));
+builder.Services.AddHttpContextAccessor();
+
+
 
 var app = builder.Build();
 app.UseAuthentication();
@@ -35,7 +41,10 @@ else
 {
     app.UseDeveloperExceptionPage();
 }
-
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
 
 
 app.UseHttpsRedirection();
@@ -44,7 +53,6 @@ app.UseSession();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-
 
 app.MapControllerRoute(
     name: "admin",

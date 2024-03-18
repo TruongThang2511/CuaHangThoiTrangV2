@@ -154,7 +154,7 @@ namespace CuaHangThoiTrangV2.Areas.Admin.Controllers
             {
                 _context.Roles.Remove(role);
             }
-            _notyfService.Success("Xóa quyền truy cập thành công!");
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

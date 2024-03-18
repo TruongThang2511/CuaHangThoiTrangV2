@@ -1,0 +1,128 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<CuaHangThoiTrangV2.Models.Sanpham>
+@{
+    Loai loai = ViewBag.CurrentLoai;
+    ViewData["Title"] = loai.TenL;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int CurrentPage = ViewBag.CurrentPage;
+    int pageNext = CurrentPage + 1;
+}
+@using Microsoft.EntityFrameworkCore;
+@{
+    dbCHTTContext _context = new dbCHTTContext();
+    var listLoais = _context.Loais
+                .AsNoTracking()
+                .OrderByDescending(x => x.MaL);
+}
+<!-- Hero Section Begin -->
+<section class="hero hero-normal">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="hero__categories">
+                    <div class="hero__categories__all">
+                        <i class="fa fa-bars"></i>
+                        <span>Loại sản phẩm</span>
+                    </div>
+                    <ul>
+                        @foreach (Loai loai1 in listLoais)
+                        {
+                            <li><a href="~/Product/ListLoai?id=@loai1.MaL">@loai1.TenL</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="hero__search">
+                    <div class="hero__search__form">
+                        <form action="#">
+                            <input type="text" placeholder="What do yo u need?">
+                            <button type="submit" class="site-btn">SEARCH</button>
+                        </form>
+                    </div>
+                    <div class="hero__search__phone">
+                        <div class="hero__search__phone__icon">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <div class="hero__search__phone__text">
+                            <h5>0931.79.80.72</h5>
+                            <span>support 24/7 time</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="@Url.Content("~/assets/img/24cara-authentic.jpg")">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>24cara Shop</h2>
+                    <div class="breadcrumb__option">
+                        <a href="/">Home</a>
+                        <span>Danh sách sản phẩm</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+<!-- Product Section Begin -->
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-5">
+                <div class="sidebar">
+                    <div class="sidebar__item">
+                        <h4>Loại sản phẩm</h4>
+                        <ul>
+                            @foreach (Loai loai1 in listLoais)
+                            {
+                                <li><a href="~/Product/ListLoai?id=@loai1.MaL">@loai1.TenL</a></li>
+                            }
+                        </ul>
+                    </div>ss
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-7">
+                <div class="filter__item">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4">
+                            <div class="filter__found">
+                                <h6><span>@Model.Count()</span> Products found</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    @if (Model != null && Model.Count() > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="@Url.Content("~/assets/img/" + @item.Hinh + "")">
+                                        <ul class="product__item__pic__hover">
+                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h6><a href="~/Product/Details?id=@item.MaSp">@item.TenSp</a></h6>
+                                        <h5>@item.Gia.ToString("###,###,###") vnđ</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <pager class="pager-container" options="@PagedListRenderOptions.Bootstrap4PageNumbersOnly" list="@Model" asp-area="" asp-controller="Product" asp-route-id="@loai.MaL" asp-action="ListLoai"></pager>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Section End -->

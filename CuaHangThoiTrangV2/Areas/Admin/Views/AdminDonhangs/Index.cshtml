@@ -1,0 +1,71 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<CuaHangThoiTrangV2.Models.Donhang>
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Họ tên khách hàng
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Ngày đặt
+            </th>
+            <th>
+                Trạng thái
+            </th>
+            <th>
+                Tổng giá trị
+            </th>
+            <th>
+                Phương thức thanh toán
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HotenKh)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayDat)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TrangThai)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tonggiatri)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaPtNavigation.TenPt)
+                    </td>
+                    <td>                        
+                        <a asp-action="Details" asp-route-id="@item.MaDh">Details</a> |
+                        <a asp-action="Xacnhan" asp-route-id="@item.MaDh">Xác nhận đơn hàng</a> |
+                        <a asp-action="Giaohang" asp-route-id="@item.MaDh">Xác nhận giao hàng</a> |
+                        <a asp-action="Hoanthanh" asp-route-id="@item.MaDh">Đã hoàn thành</a>                        
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+Trang @CurrentPage
+<pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminDonhangs" asp-action="Index"></pager>
