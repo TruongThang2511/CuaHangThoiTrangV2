@@ -86,7 +86,7 @@ namespace CuaHangThoiTrangV2.Areas.Admin.Controllers
             }
             if (ls == null)
             {
-                return PartialView("DoanhthuphuongthucPartial", null);
+                return PartialView("DoanhthuphuongthucPartial", doanhthu);
             }
             else
             {
