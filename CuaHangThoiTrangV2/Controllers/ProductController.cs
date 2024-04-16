@@ -72,14 +72,22 @@ namespace CuaHangThoiTrangV2.Controllers
             try
             {
                 var pageSize = 12;
-                var loai = _context.Loais.AsNoTracking().SingleOrDefault(x => x.MaL == id);
+
+                var loai = _context.Loais
+                    .AsNoTracking()
+                    .SingleOrDefault(x => x.MaL == id);
+
                 var lsSanphams = _context.Sanphams
                     .AsNoTracking()
                     .Where(x => x.MaL == loai.MaL)
                     .OrderByDescending(x => x.MaSp);
+
                 PagedList<Sanpham> models = new PagedList<Sanpham>(lsSanphams, page, pageSize);
+
                 ViewBag.CurrentPage = page;
+
                 ViewBag.CurrentLoai = loai;
+
                 return View(models);
             }
             catch
@@ -92,11 +100,16 @@ namespace CuaHangThoiTrangV2.Controllers
         {
             try
             {
-                var product = _context.Sanphams.Include(x => x.MaLNavigation).Include(x => x.MaThNavigation).FirstOrDefault(x => x.MaSp == id);
+                var product = _context.Sanphams
+                    .Include(x => x.MaLNavigation)
+                    .Include(x => x.MaThNavigation)
+                    .FirstOrDefault(x => x.MaSp == id);
+
                 if (product == null)
                 {
                     return RedirectToAction("Index");
                 }
+
                 ViewBag.Chitiet = product;
                 
                 var lsSanphams = _context.Sanphams

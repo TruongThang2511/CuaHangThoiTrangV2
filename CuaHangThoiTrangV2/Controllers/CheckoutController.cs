@@ -39,12 +39,18 @@ namespace CuaHangThoiTrangV2.Controllers
         public IActionResult Index()
         {
             ViewBag.PaymentID = new SelectList(_context.Phuongthucthanhtoans, "MaPt", "TenPt", 1);
+
             var cart = HttpContext.Session.Get<List<CartItem>>("GioHang");
+
             var taikhoanID = HttpContext.Session.GetString("MaNd");
+
             MuaHangViewModel model = new MuaHangViewModel();
             if (taikhoanID != null)
             {
-                var khachhang = _context.Nguoidungs.AsNoTracking().SingleOrDefault(x => x.MaNd == Convert.ToInt32(taikhoanID));
+                var khachhang = _context.Nguoidungs
+                    .AsNoTracking()
+                    .SingleOrDefault(x => x.MaNd == Convert.ToInt32(taikhoanID));
+
                 model.MaNd = khachhang.MaNd;
                 model.TenNd = khachhang.TenNd;
                 model.Email = khachhang.Email;

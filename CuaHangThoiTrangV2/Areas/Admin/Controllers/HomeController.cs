@@ -19,11 +19,17 @@ namespace CuaHangThoiTrangV2.Areas.Admin.Controllers
         public IActionResult Index(int? page)
         {
             var taikhoanID = HttpContext.Session.GetString("MaNd");
-            var user = _context.Nguoidungs.FirstOrDefault(x => x.MaNd.ToString().Contains(taikhoanID));
+
+            var user = _context.Nguoidungs
+                .FirstOrDefault(x => x.MaNd.ToString().Contains(taikhoanID));
+
             ViewBag.phuongthuc = new SelectList(_context.Phuongthucthanhtoans, "MaPt", "TenPt", 1);
+
             ViewBag.tongdoanhthu = (double)_context.Donhangs.Sum(m => m.Tonggiatri);
+
             if (user == null)
                 return NotFound();
+
             if (user.MaRole != 1)
                 return NotFound();
 
