@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+      let player;
+
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          videoId: 'eKCZhq86HLE',
+          playerVars: {
+            controls: 0,
+            showinfo: 0,
+            modestbranding: 0,
+            disablekb: 1,
+            autoplay: 1
+          },
+          events: {
+            onReady: onPlayerReady
+          }
+        });
+      }
+
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+    </script>
+  </head>
+  <body>
+    <div id="player"></div>
+  </body>
+</html>
