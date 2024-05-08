@@ -23,6 +23,12 @@ namespace CuaHangThoiTrangV2.Areas.Admin.Controllers
             var user = _context.Nguoidungs
                 .FirstOrDefault(x => x.MaNd.ToString().Contains(taikhoanID));
 
+
+            if (user != null)
+            {
+                ViewBag.tenND = user.TenNd.ToString();
+            }
+
             ViewBag.phuongthuc = new SelectList(_context.Phuongthucthanhtoans, "MaPt", "TenPt", 1);
 
             ViewBag.tongdoanhthu = (double)_context.Donhangs.Sum(m => m.Tonggiatri);

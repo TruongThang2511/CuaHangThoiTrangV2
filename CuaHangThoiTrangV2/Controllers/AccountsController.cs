@@ -161,6 +161,8 @@ namespace CuaHangThoiTrangV2.Controllers
                     }
                     HttpContext.Session.SetString("MaNd", nguoidung.MaNd.ToString());
                     var taikhoanID = HttpContext.Session.GetString("MaNd");
+                    HttpContext.Session.SetString("TenNd", nguoidung.TenNd.ToString());
+                    var tenND = HttpContext.Session.GetString("TenNd");
                     //Identity
                     var claims = new List<Claim>
                     {

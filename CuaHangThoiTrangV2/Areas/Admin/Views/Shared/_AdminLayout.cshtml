@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="~/adminassets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="~/adminassets/images/favicon.ico" />
+    
 </head>
 <body>
     <div class="container-scroller">
@@ -56,6 +57,7 @@
                             </span> Dashboard
                         </h3>                        
                     </div>
+                
                     @RenderBody()
                 </div>
                 <!-- content-wrapper ends -->
@@ -88,7 +90,8 @@
     <!-- Custom js for this page -->
     <script src="~/adminassets/js/dashboard.js"></script>
     <script src="~/adminassets/js/todolist.js"></script>
-    <!-- End custom js for this page -->
+
+
     @await Component.InvokeAsync("Notyf")
     @await RenderSectionAsync("Scripts", required: false)
 </body>

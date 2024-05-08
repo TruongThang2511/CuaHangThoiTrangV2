@@ -3,7 +3,26 @@
     List<Loai> lsLoais = ViewBag.lsLoais;
     List<Thuonghieu> lsThuonghieus = ViewBag.lsThuonghieus;
     List<Sanpham> lsSP = ViewBag.lsSP;
+    string name = ViewBag.tenND;
+    string role = ViewBag.role;
 }
+<style>
+    #messagesList{
+        display: inline-block;
+        width: 85%;
+        height: 300px;
+        list-style-type: none;
+        padding: 0;
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    #messagesList li{
+        text-align:right;
+    }
+</style>
+
 <!-- Hero Section Begin -->
     <section class="hero">
         <div class="container">
@@ -40,13 +59,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="hero__item set-bg" data-setbg="@Url.Content("~/assets/img/banner.jpg")">
-                    </div>
+                <div class="hero__item set-bg" data-setbg="@Url.Content("~/assets/img/banner.jpg")">
                 </div>
+                </div>
+                
             </div>
         </div>
     </section>
     <!-- Hero Section End -->
+
 
     <!-- Categories Section Begin -->
     <section class="categories">
@@ -66,6 +87,32 @@
         </div>
     </section>
     <!-- Categories Section End -->
+
+<div class="container">
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-6">
+            <div id="player"></div>
+        </div>
+        <div class="col-6" style="width: 50px; width: 60% ; display: flex; flex-wrap: wrap;justify-content: flex-end;">
+            <ul id="messagesList"></ul>
+            @if (name != null)
+            {
+                if(role == "1")
+                {
+                    <input type="hidden" class="form-control" id="userInput" value="Admin" />
+                }
+                <input type="hidden" class="form-control" id="userInput" value="@name" />
+            }
+            else
+            {
+                <input type="text" class="form-control" id="userInput" />
+            }
+            <input type="text" class="form-control" id="messageInput" />
+            <input type="button" class="btn btn-primary" id="sendButton" value="Send Message" />
+        </div>
+    </div>
+</div>
 
     <!-- Featured Section Begin -->
     <section class="featured spad">
@@ -95,3 +142,22 @@
         </div>
     </section>
     <!-- Featured Section End -->
+
+    <script>
+    // Cuộn về dưới cùng của vùng cuộn
+    function scrollToBottom() {
+        const messagesList = document.getElementById('messagesList');
+        messagesList.scrollTop = messagesList.scrollHeight;
+    }
+
+
+    // Gửi tin nhắn khi nhấn nút "Send Message"
+
+    const sendButton = document.getElementById('sendButton');
+    const messageInput = document.getElementById('messageInput');
+    sendButton.addEventListener('click', function () {
+        const message = messageInput.value;
+        addNewMessage(message, true); // Tin nhắn người dùng
+        messageInput.value = ''; // Xóa nội dung ô nhập liệu
+    });
+    </script>

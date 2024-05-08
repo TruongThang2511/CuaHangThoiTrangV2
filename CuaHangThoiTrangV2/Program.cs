@@ -26,6 +26,10 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[] {UnicodeRanges.All}));
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddSignalR();
+builder.Services.AddControllers();
+builder.Services.AddRazorPages();
+
 
 
 var app = builder.Build();
@@ -53,6 +57,13 @@ app.UseSession();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapRazorPages();
+    endpoints.MapControllers();
+    endpoints.MapHub<ChatHub>("/chathub");
+});
 
 app.MapControllerRoute(
     name: "admin",

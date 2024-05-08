@@ -23,6 +23,19 @@ namespace CuaHangThoiTrangV2.Controllers
             ViewBag.lsLoais = _context.Loais.AsNoTracking().OrderByDescending(x => x.MaL).ToList();
             ViewBag.lsThuonghieus = _context.Thuonghieus.AsNoTracking().OrderByDescending(x => x.MaTh).ToList();
             ViewBag.lsSP = _context.Sanphams.AsNoTracking().OrderByDescending(x => x.MaSp).Take(8).ToList();
+            var taikhoan = HttpContext.Session.GetString("MaNd");
+            //if (tenNd != null) ViewBag.tenND = _context.Nguoidungs.FirstOrDefault(x => x.TenNd.ToString().Contains(tenNd)).ToString();
+            //ViewBag.tenND = _context.Nguoidungs.AsNoTracking().Where(x => x.TenNd.ToString().Contains(tenNd)).ToString();
+            var user = _context.Nguoidungs
+                            .FirstOrDefault(x => x.MaNd.ToString().Contains(taikhoan));
+
+            if(user != null)
+            {
+                ViewBag.tenND = user.TenNd.ToString();
+                if (user.MaRole == 1)
+                    ViewBag.role = "1";
+            }
+
             return View();
         }
         [Route("lien-he.html", Name = "Contact")]
